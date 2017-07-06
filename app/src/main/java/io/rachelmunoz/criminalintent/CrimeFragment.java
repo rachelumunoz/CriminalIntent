@@ -75,7 +75,7 @@ public class CrimeFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				FragmentManager fragmentManager = getFragmentManager();
-				DatePickerFragment dialog = new DatePickerFragment();
+				DatePickerFragment dialog = DatePickerFragment.newInstance(mCrime.getDate());
 				dialog.show(fragmentManager, DIALOG_DATE); // the AlertDialog calls #show and passes in the fm, with a unique identifier
 			}
 		});
