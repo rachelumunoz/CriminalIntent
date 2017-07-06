@@ -3,6 +3,7 @@ package io.rachelmunoz.criminalintent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -27,6 +28,7 @@ public class CrimeFragment extends Fragment {
 	private Button mDateButton;
 	private CheckBox mCrimeSolved;
 	private static final String ARG_CRIME_ID = "crime_id";
+	private static final String DIALOG_DATE = "DialogDate";
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,7 +71,14 @@ public class CrimeFragment extends Fragment {
 
 		mDateButton = (Button) v.findViewById(R.id.crime_date);
 		mDateButton.setText(mCrime.getDate().toString());
-		mDateButton.setEnabled(false);
+		mDateButton.setOnClickListener( new View.OnClickListener(){
+			@Override
+			public void onClick(View view) {
+				FragmentManager fragmentManager = getFragmentManager();
+				DatePickerFragment dialog = new DatePickerFragment();
+				dialog.show(fragmentManager, DIALOG_DATE); // the AlertDialog calls #show and passes in the fm, with a unique identifier
+			}
+		});
 
 		mCrimeSolved = (CheckBox) v.findViewById(R.id.crime_solved);
 		mCrimeSolved.setChecked(mCrime.isSolved());
