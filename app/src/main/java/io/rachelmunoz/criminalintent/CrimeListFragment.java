@@ -32,16 +32,39 @@ public class CrimeListFragment extends Fragment {
 	private CrimeAdapter mAdapter;
 	private boolean mSubtitleVisible;
 
+	private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 	}
 
+	@Nullable
+	@Override
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_crime_list, container, false); // inflate the fragment XML
+
+		mCrimeRecyclerView = (RecyclerView) view.findViewById(R.id.crime_recycler_view); // find the RecyclerView widget
+		mCrimeRecyclerView.setLayoutManager( new LinearLayoutManager(getActivity())); // need to set LayoutManager to position items on sceen
+
+		if (savedInstanceState != null){
+			mSubtitleVisible = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE);
+		}
+		updateUI();
+		return view;
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
 		updateUI();
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putBoolean(SAVED_SUBTITLE_VISIBLE, mSubtitleVisible);
 	}
 
 	@Override
@@ -88,18 +111,6 @@ public class CrimeListFragment extends Fragment {
 
 		AppCompatActivity activity = (AppCompatActivity) getActivity();
 		activity.getSupportActionBar().setSubtitle(subtitle);
-	}
-
-	@Nullable
-	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_crime_list, container, false); // inflate the fragment XML
-
-		mCrimeRecyclerView = (RecyclerView) view.findViewById(R.id.crime_recycler_view); // find the RecyclerView widget
-		mCrimeRecyclerView.setLayoutManager( new LinearLayoutManager(getActivity())); // need to set LayoutManager to position items on sceen
-
-		updateUI();
-		return view;
 	}
 
 	private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
