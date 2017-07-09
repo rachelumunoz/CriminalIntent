@@ -47,7 +47,7 @@ public class CrimeFragment extends Fragment {
 	public void onPause() {
 		super.onPause();
 
-		CrimeLab.get(getActivity()).addCrime(mCrime);
+		CrimeLab.get(getActivity()).updateCrime(mCrime);
 	}
 
 	public static CrimeFragment newInstance(UUID id){

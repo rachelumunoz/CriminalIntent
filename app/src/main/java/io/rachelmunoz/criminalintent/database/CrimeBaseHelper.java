@@ -10,7 +10,7 @@ import io.rachelmunoz.criminalintent.database.CrimeDbSchema.CrimeTable;
  * Created by rachelmunoz on 7/8/17.
  */
 
-public class CrimeBaseHelper extends SQLiteOpenHelper {
+public class CrimeBaseHelper extends SQLiteOpenHelper { // creates DB and configures, and updates stuff
 	private static final int VERSION = 1;
 	private static final String DATABASE_NAME = "crimeBase.db";
 
