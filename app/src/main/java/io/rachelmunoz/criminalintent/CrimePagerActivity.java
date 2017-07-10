@@ -27,15 +27,15 @@ public class CrimePagerActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_crime_pager);
 
-		UUID crimeId = (UUID) getIntent().getSerializableExtra(EXTRA_CRIME_ID);
+		UUID crimeId = (UUID) getIntent().getSerializableExtra(EXTRA_CRIME_ID); // to set the ViewPager to correct idx
 
-		mViewPager = (ViewPager) findViewById(R.id.crime_view_pager);
+		mViewPager = (ViewPager) findViewById(R.id.crime_view_pager); // swiper widget element
 
-		mCrimes = CrimeLab.get(this).getCrimes();
+		mCrimes = CrimeLab.get(this).getCrimes(); // this because gets us correct context b/c we are in an Activity
 		FragmentManager fragmentManager = getSupportFragmentManager();
-		mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
-
-			@Override
+		mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) { // ViewPager adapter needs FragmentManager
+																				// b/c inserting different Fragments &
+			@Override                                                          // not held on to by a ViewHolder
 			public Fragment getItem(int position) {
 				Crime crime = mCrimes.get(position);
 				return CrimeFragment.newInstance(crime.getId());
@@ -56,7 +56,7 @@ public class CrimePagerActivity extends AppCompatActivity {
 
 	}
 
-	public static Intent newIntent(Context packageContext, UUID id){
+	public static Intent newIntent(Context packageContext, UUID id){ // called by CrimeListFragment to know which Activity to launch
 		Intent intent = new Intent(packageContext, CrimePagerActivity.class);
 		intent.putExtra(EXTRA_CRIME_ID, id);
 		return intent;

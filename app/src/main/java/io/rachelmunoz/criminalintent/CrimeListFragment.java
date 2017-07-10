@@ -64,7 +64,7 @@ public class CrimeListFragment extends Fragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putBoolean(SAVED_SUBTITLE_VISIBLE, mSubtitleVisible);
+		outState.putBoolean(SAVED_SUBTITLE_VISIBLE, mSubtitleVisible); // for rotation configuration rebuild
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class CrimeListFragment extends Fragment {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(MenuItem item) { // callback for menu interaction
 		switch (item.getItemId()){
 			case R.id.new_crime:
 				Crime crime = new Crime();
@@ -92,7 +92,7 @@ public class CrimeListFragment extends Fragment {
 				return true;
 			case R.id.show_subtitle:
 				mSubtitleVisible = !mSubtitleVisible;
-				getActivity().invalidateOptionsMenu();
+				getActivity().invalidateOptionsMenu(); // recreates menu
 				updateSubtitle();
 				return true;
 			default:
@@ -183,7 +183,7 @@ public class CrimeListFragment extends Fragment {
 			mAdapter = new CrimeAdapter(crimes);
 			mCrimeRecyclerView.setAdapter(mAdapter);
 		} else {
-			mAdapter.setCrimes(crimes);
+			mAdapter.setCrimes(crimes); // updates crimes incase it is different
 			mAdapter.notifyDataSetChanged();
 		}
 

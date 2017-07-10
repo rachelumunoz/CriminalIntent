@@ -50,7 +50,7 @@ public class CrimeFragment extends Fragment {
 		CrimeLab.get(getActivity()).updateCrime(mCrime);
 	}
 
-	public static CrimeFragment newInstance(UUID id){
+	public static CrimeFragment newInstance(UUID id){ // called by CrimePagerActivity to get which Crime to show/host
 		Bundle args = new Bundle();
 		args.putSerializable(ARG_CRIME_ID, id);
 
@@ -86,8 +86,8 @@ public class CrimeFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				FragmentManager fragmentManager = getFragmentManager();
-				DatePickerFragment dialog = DatePickerFragment.newInstance(mCrime.getDate());
-				dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
+				DatePickerFragment dialog = DatePickerFragment.newInstance(mCrime.getDate()); // load bundled DatePickerFragment
+				dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE); // for lifecycle communication
 				dialog.show(fragmentManager, DIALOG_DATE); // the AlertDialog calls #show and passes in the fm, with a unique identifier
 			}
 		});

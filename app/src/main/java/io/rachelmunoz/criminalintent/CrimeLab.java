@@ -40,7 +40,7 @@ public class CrimeLab {
 
 
 	private CrimeLab(Context context){
-		mContext = context.getApplicationContext();
+		mContext = context.getApplicationContext(); // goes up to whole Application context ?
 		mDatabase = new CrimeBaseHelper(mContext).getWritableDatabase();
 
 //		mCrimes = new ArrayList<>();
@@ -116,7 +116,7 @@ public class CrimeLab {
 		return new CrimeCursorWrapper(cursor);
 	}
 
-	private static ContentValues getContentValues(Crime crime){
+	private static ContentValues getContentValues(Crime crime){ // sql-izes crime
 		ContentValues values = new ContentValues();
 		values.put(CrimeTable.Cols.UUID, crime.getId().toString());
 		values.put(CrimeTable.Cols.TITLE, crime.getTitle());
