@@ -1,5 +1,7 @@
 package io.rachelmunoz.criminalintent;
 
+import android.text.format.DateFormat;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -61,6 +63,10 @@ public class Crime {
 
 	public String getPhotoFilename(){
 		return "IMG_" + getId().toString() + ".jpg";
+	}
+
+	public String getFormattedDate(){
+		return DateFormat.format("EEE, MMM dd", getDate()).toString();
 	}
 }
 
