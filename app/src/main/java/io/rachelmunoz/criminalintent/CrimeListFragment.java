@@ -153,7 +153,7 @@ public class CrimeListFragment extends Fragment {
 
 		}
 
-		public void bind(Crime crime){
+		public void bind(Crime crime){ // Adapter gives VH each Crime
 			mCrime = crime;
 			mTitleTextView.setText(mCrime.getTitle());
 			mDateTextView.setText(mCrime.getFormattedDate());
@@ -197,7 +197,7 @@ public class CrimeListFragment extends Fragment {
 
 	}
 
-	private void updateUI(){
+	public void updateUI(){
 		CrimeLab crimeLab = CrimeLab.get(getActivity());
 		List<Crime> crimes = crimeLab.getCrimes();
 
