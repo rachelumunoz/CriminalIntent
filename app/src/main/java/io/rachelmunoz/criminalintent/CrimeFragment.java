@@ -30,7 +30,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.util.Date;
@@ -64,6 +63,7 @@ public class CrimeFragment extends Fragment {
 
 	public interface Callbacks {
 		void onCrimeUpdate(Crime crime);
+		void onDeleteCrime();
 	}
 
 	@Override
@@ -74,8 +74,6 @@ public class CrimeFragment extends Fragment {
 		UUID crimeID = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
 		mCrime = CrimeLab.get(getActivity()).getCrime(crimeID);
 		mPhotoFile = CrimeLab.get(getActivity()).getPhotoFile(mCrime);
-
-
 	}
 
 
@@ -90,7 +88,7 @@ public class CrimeFragment extends Fragment {
 		switch (item.getItemId()){
 			case R.id.delete_crime:
 				CrimeLab.get(getActivity()).deleteCrime(mCrime);
-				getActivity().finish();
+				mCallbacks.onDeleteCrime();
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
