@@ -62,7 +62,7 @@ public class CrimeFragment extends Fragment {
 	private static final int REQUEST_PHOTO = 2;
 
 	public interface Callbacks {
-		void onCrimeUpdate(Crime crime);
+		void onCrimeUpdate(Crime crime); // need Crime por que?
 		void onDeleteCrime();
 	}
 
@@ -88,7 +88,7 @@ public class CrimeFragment extends Fragment {
 		switch (item.getItemId()){
 			case R.id.delete_crime:
 				CrimeLab.get(getActivity()).deleteCrime(mCrime);
-				mCallbacks.onDeleteCrime();
+				mCallbacks.onDeleteCrime(); // different host Activity, based on screen size
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
